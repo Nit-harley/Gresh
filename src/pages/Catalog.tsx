@@ -4,9 +4,11 @@ import type { Product } from '../types';
 
 export default function Catalog() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<string>('');
+
+  const filteredProducts = selectedCategory === 'all'
+    ? products
     : products.filter(product => product.category === selectedCategory);
 
   const handleWhatsApp = (product: Product) => {
@@ -15,33 +17,39 @@ export default function Catalog() {
     window.open(whatsappUrl, '_blank');
   };
 
+  const openModal = (image: string) => {
+    setModalImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalImage('');
+  };
+
   return (
     <div className="bg-primary-light min-h-screen">
       {/* Hero Section */}
-      <div 
-        className="h-[300px] bg-cover bg-center relative"
+      <div
+        className="h-[400px] bg-cover bg-center relative"
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1534702718572-448a8d5df8e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")'
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Notre Catalogue</h1>
-            <p className="text-xl">Découvrez notre collection de tenues africaines modernes</p>
+            <p className="text-lg md:text-xl">Découvrez des tenues africaines modernes qui vous feront rayonner</p>
           </div>
         </div>
       </div>
 
-      {/* Categories */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-wrap gap-4 justify-center mb-8">
+      {/* Categories - scrollable on mobile */}
+      <div className="container mx-auto px-4 py-8 md:px-6">
+        <div className="flex gap-4 overflow-x-auto md:justify-center scrollbar-hide mb-10 pb-2">
           <button
             onClick={() => setSelectedCategory('all')}
-            className={'px-6 py-2 rounded-full transition-colors ' + (
-              selectedCategory === 'all'
-                ? 'bg-gold text-primary'
-                : 'bg-white text-primary border border-gold hover:bg-gold hover:text-primary'
-            )}
+            className={`flex-shrink-0 px-6 py-2 rounded-full text-sm md:text-lg font-semibold transition-all duration-300 ${selectedCategory === 'all' ? 'bg-gold text-primary' : 'bg-white text-primary border-2 border-gold hover:bg-gold hover:text-primary'}`}
           >
             Tous
           </button>
@@ -49,11 +57,7 @@ export default function Catalog() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={'px-6 py-2 rounded-full transition-colors ' + (
-                selectedCategory === category
-                  ? 'bg-gold text-primary'
-                  : 'bg-white text-primary border border-gold hover:bg-gold hover:text-primary'
-              )}
+              className={`flex-shrink-0 px-6 py-2 rounded-full text-sm md:text-lg font-semibold transition-all duration-300 ${selectedCategory === category ? 'bg-gold text-primary' : 'bg-white text-primary border-2 border-gold hover:bg-gold hover:text-primary'}`}
             >
               {category}
             </button>
@@ -61,22 +65,23 @@ export default function Catalog() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {filteredProducts.map(product => (
-            <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <img 
-                src={product.image} 
+            <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <img
+                src={product.image}
                 alt={product.name}
-                className="w-full h-80 object-cover"
+                className="w-full h-80 object-cover cursor-pointer"
+                onClick={() => openModal(product.image)}
               />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-primary">{product.name}</h3>
-                <p className="text-gray-600 mb-4">{product.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gold">{product.price} FCFA</span>
+              <div className="p-4 flex flex-col">
+                <h3 className="text-xl font-semibold text-primary mb-3">{product.name}</h3>
+                <p className="text-gray-700 text-sm mb-4 flex-1">{product.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-xl font-bold text-gold">{product.price} FCFA</span>
                   <button
                     onClick={() => handleWhatsApp(product)}
-                    className="bg-accent-green text-white px-6 py-2 rounded-full hover:bg-accent-orange transition-colors"
+                    className="bg-accent-green text-white px-6 py-2 rounded-full hover:bg-accent-orange transition-colors text-sm font-medium"
                   >
                     Acheter
                   </button>
@@ -86,6 +91,25 @@ export default function Catalog() {
           ))}
         </div>
       </div>
+
+      {/* Modal for viewing the product image */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+          <div className="relative max-w-4xl mx-4">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-white text-3xl font-bold"
+            >
+              &times;
+            </button>
+            <img
+              src={modalImage}
+              alt="Enlarged product"
+              className="max-w-full max-h-[80vh] object-contain"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

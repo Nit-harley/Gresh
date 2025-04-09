@@ -7,6 +7,8 @@ export default function Catalog() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
+  const [touchStart, setTouchStart] = useState<number>(0);
+  const [touchEnd, setTouchEnd] = useState<number>(0);
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -36,6 +38,22 @@ export default function Catalog() {
 
   const handlePrev = () => {
     setCarouselIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    setTouchEnd(e.changedTouches[0].clientX);
+    if (touchStart - touchEnd > 100) {
+      // Swipe left (next image)
+      handleNext();
+    }
+    if (touchEnd - touchStart > 100) {
+      // Swipe right (previous image)
+      handlePrev();
+    }
   };
 
   return (
@@ -105,53 +123,56 @@ export default function Catalog() {
 
       {/* Modal with carousel */}
       {isModalOpen && modalImages.length > 0 && (
-  <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-    <div className="relative max-w-4xl mx-4 w-full">
-      {/* Close Button */}
-      <button
-        onClick={closeModal}
-        className="absolute top-4 right-4 text-white text-3xl font-bold"
-      >
-        &times;
-      </button>
-      <div className="flex justify-center items-center space-x-4 sm:space-x-6">
-        {/* Left Arrow */}
-        <button
-          onClick={handlePrev}
-          className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200 sm:text-xl text-lg"
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          &lt;
-        </button>
-        
-        {/* Image with responsive sizing */}
-        <img
-          src={modalImages[carouselIndex]}
-          alt="Enlarged product"
-          className="w-full max-h-[80vh] object-contain rounded-lg transition-all duration-300"
-        />
-        
-        {/* Right Arrow */}
-        <button
-          onClick={handleNext}
-          className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200 sm:text-xl text-lg"
-        >
-          &gt;
-        </button>
-      </div>
-      
-      {/* Indicator */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4">
-        {modalImages.map((_, index) => (
-          <div
-            key={index}
-            className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full ${carouselIndex === index ? 'bg-white' : 'bg-gray-400'}`}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-)}
-
+          <div className="relative max-w-4xl mx-4 w-full">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-white text-3xl font-bold"
+            >
+              &times;
+            </button>
+            <div className="flex justify-center items-center space-x-4 sm:space-x-6">
+              {/* Left Arrow */}
+              <button
+                onClick={handlePrev}
+                className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200 sm:text-xl text-lg"
+              >
+                &lt;
+              </button>
+              
+              {/* Image with responsive sizing */}
+              <img
+                src={modalImages[carouselIndex]}
+                alt="Enlarged product"
+                className="w-full max-h-[80vh] object-contain rounded-lg transition-all duration-300"
+              />
+              
+              {/* Right Arrow */}
+              <button
+                onClick={handleNext}
+                className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200 sm:text-xl text-lg"
+              >
+                &gt;
+              </button>
+            </div>
+            
+            {/* Indicator */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4">
+              {modalImages.map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full ${carouselIndex === index ? 'bg-white' : 'bg-gray-400'}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

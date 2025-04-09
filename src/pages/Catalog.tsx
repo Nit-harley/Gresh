@@ -5,7 +5,8 @@ import type { Product } from '../types';
 export default function Catalog() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [modalImage, setModalImage] = useState<string>('');
+  const [modalImages, setModalImages] = useState<string[]>([]);
+  const [carouselIndex, setCarouselIndex] = useState<number>(0);
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -17,14 +18,24 @@ export default function Catalog() {
     window.open(whatsappUrl, '_blank');
   };
 
-  const openModal = (image: string) => {
-    setModalImage(image);
+  const openModal = (images: string[]) => {
+    setModalImages(images);
+    setCarouselIndex(0);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalImage('');
+    setModalImages([]);
+    setCarouselIndex(0);
+  };
+
+  const handleNext = () => {
+    setCarouselIndex((prev) => (prev + 1) % modalImages.length);
+  };
+
+  const handlePrev = () => {
+    setCarouselIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
   };
 
   return (
@@ -44,7 +55,7 @@ export default function Catalog() {
         </div>
       </div>
 
-      {/* Categories - scrollable on mobile */}
+      {/* Categories */}
       <div className="container mx-auto px-4 py-8 md:px-6">
         <div className="flex gap-4 overflow-x-auto md:justify-center scrollbar-hide mb-10 pb-2">
           <button
@@ -72,7 +83,7 @@ export default function Catalog() {
                 src={product.image}
                 alt={product.name}
                 className="w-full h-80 object-cover cursor-pointer"
-                onClick={() => openModal(product.image)}
+                onClick={() => openModal(product.images || [product.image])}
               />
               <div className="p-4 flex flex-col">
                 <h3 className="text-xl font-semibold text-primary mb-3">{product.name}</h3>
@@ -92,21 +103,47 @@ export default function Catalog() {
         </div>
       </div>
 
-      {/* Modal for viewing the product image */}
-      {isModalOpen && (
+      {/* Modal with carousel */}
+      {isModalOpen && modalImages.length > 0 && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
           <div className="relative max-w-4xl mx-4">
+            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 text-white text-3xl font-bold"
             >
               &times;
             </button>
-            <img
-              src={modalImage}
-              alt="Enlarged product"
-              className="max-w-full max-h-[80vh] object-contain"
-            />
+            <div className="flex justify-center items-center space-x-4">
+              {/* Left Arrow */}
+              <button
+                onClick={handlePrev}
+                className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200"
+              >
+                &lt;
+              </button>
+              <img
+                src={modalImages[carouselIndex]}
+                alt="Enlarged product"
+                className="max-w-full max-h-[80vh] object-contain rounded-lg transition-all duration-300"
+              />
+              {/* Right Arrow */}
+              <button
+                onClick={handleNext}
+                className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200"
+              >
+                &gt;
+              </button>
+            </div>
+            {/* Indicator */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {modalImages.map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-2 w-2 rounded-full ${carouselIndex === index ? 'bg-white' : 'bg-gray-400'}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}

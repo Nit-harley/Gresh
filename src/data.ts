@@ -9,8 +9,8 @@ export const categories = [
 export const products = [
   {
     id: 1,
-    name: 'Eliang Mine ga',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'Eliang Mine ga : Motif répétitif de rosaces florale Bleu et Marron sur fond crème/beige clair avec Manchette de velour marron',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'Eliang Mine ga',
     image: "../images/col1.JPG",
@@ -22,8 +22,8 @@ export const products = [
   },
   {
     id: 2,
-    name: 'Eliang Mine ga',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'Eliang Mine ga : Motif feuillage stylisé vert sur fond blanc et rose avec Manchette de velour rose',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'Eliang Mine ga',
     image: "../images/col2a.JPG",
@@ -35,8 +35,8 @@ export const products = [
 
   {
     id: 3,
-    name: 'Coupe Sirène',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'Coupe Sirène : Motifs feuillages turcoise foncé sur fond blanc - Manches longues',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'Coupe Sirène',
     image: "../images/col22 (1).JPG",
@@ -49,8 +49,8 @@ export const products = [
 
   {
     id: 4,
-    name: 'Coupe Sirène',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'Coupe Sirène : Motifs fleurs jaunes sur fond rose fuchsia avec feuillages noirs et verts - Manches longues',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'Coupe Sirène',
     image: "../images/col23 (1).JPG",
@@ -63,8 +63,8 @@ export const products = [
 
   {
     id: 5,
-    name: 'La Mav',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'La Mav : Motifs wax jaune, marron et noir sur fond jaune, Manchette jaune',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'La Mav',
     image: "../images/col3a.JPG",
@@ -77,8 +77,8 @@ export const products = [
 
   {
     id: 6,
-    name: 'La Mav',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'La Mav : Motifs wax bleu et noir sur fond jaune, Manchette bleu uni',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'La Mav',
     image: "../images/col33a.JPG",
@@ -91,8 +91,8 @@ export const products = [
 
   {
     id: 7,
-    name: 'La Mav',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'La Mav : Motifs wax bleu, Marron et blanc, Manches pleines bleu uni',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 20000,
     category: 'La Mav',
     image: "../images/col333a.JPG",
@@ -105,8 +105,8 @@ export const products = [
 
   {
     id: 8,
-    name: 'Bango',
-    description: 'Elle est faite de wax hollandais et de organza, la couture de base est faite en élastique',
+    name: 'Bango : motifs africains noir, orange et jaune sur fond clair, sans manches, col en V, poches latérales',
+    description: 'Tailles disponibles : S, M, L, XL',
     price: 22000,
     category: 'Bango',
     image: "../images/col4a (4).JPG",

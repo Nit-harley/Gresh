@@ -40,7 +40,7 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center space-x-4">
             <Phone className="text-gold" size={24} />
-            <span>+241 77 98 23 45</span>
+            <span>+241 04 52 23 65</span>
           </div>
 
           {/* Mobile Menu Button */}

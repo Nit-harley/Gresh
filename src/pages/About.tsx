@@ -7,7 +7,7 @@ export default function About() {
       <div 
         className="h-[400px] bg-cover bg-center relative"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1589363360147-4f2d51541551?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")'
+          backgroundImage: 'url("../images/col4a (5).JPG")'
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
@@ -24,10 +24,16 @@ export default function About() {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-6 text-primary">Notre Vision</h2>
             <p className="text-gray-600 mb-8">
-              Fondée en 2020 à Libreville, Gresh est née d'une passion pour la mode africaine et d'une vision 
-              de moderniser les tenues traditionnelles. Notre objectif est de créer des vêtements qui célèbrent 
-              la richesse de notre culture tout en embrassant les tendances contemporaines.
+            Grecy est une jeune entrepreneure de 21 ans en 2025 passionnée et créative, résolument engagée dans la valorisation du patrimoine culturel africain à travers la mode. Depuis toujours fascinée par les tissus traditionnels, elle a su transformer cette passion en une véritable aventure entrepreneuriale en créant GRESH. 
             </p>
+
+            <h2 className="text-3xl font-bold mb-6 text-primary"> Un Parcours Inspiré par la Culture et l’Innovation</h2>
+
+            <p className="text-gray-600 mb-8">Dès le début de son parcours, Grecy a démontré une sensibilité particulière pour l’esthétique et le savoir-faire artisanal. Son parcours se caractérise par : </p>
+	•	Un héritage culturel : Grandir dans un environnement riche en traditions lui a permis de puiser dans l’authenticité du pagne et des motifs ancestraux. <br/>
+	•	La quête de l’originalité : Grecy réinvente ces codes traditionnels en les associant à des coupes modernes et des designs contemporains, créant ainsi des pièces uniques qui racontent une histoire.<br/> 
+	•	L’engagement sur mesure : La personnalisation et le sur-mesure sont au cœur de sa démarche, permettant à chaque client de porter une création qui reflète sa personnalité et son identité. <br/><br/>
+         
             <p className="text-gray-600 mb-8">
               Chaque pièce que nous créons raconte une histoire, celle de notre héritage africain 
               réinventé pour le monde moderne. Nous travaillons avec les meilleurs artisans locaux 
@@ -64,41 +70,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-primary">Notre Équipe</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <img
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Marie Koumba"
-                className="w-48 h-48 rounded-full mx-auto mb-4 object-cover border-4 border-gold"
-              />
-              <h3 className="text-xl font-semibold text-primary">Marie Koumba</h3>
-              <p className="text-gold">Fondatrice & Directrice Créative</p>
-            </div>
-            <div className="text-center">
-              <img
-                src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Jean Moussa"
-                className="w-48 h-48 rounded-full mx-auto mb-4 object-cover border-4 border-gold"
-              />
-              <h3 className="text-xl font-semibold text-primary">Jean Moussa</h3>
-              <p className="text-gold">Chef Designer</p>
-            </div>
-            <div className="text-center">
-              <img
-                src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                alt="Sarah Ndong"
-                className="w-48 h-48 rounded-full mx-auto mb-4 object-cover border-4 border-gold"
-              />
-              <h3 className="text-xl font-semibold text-primary">Sarah Ndong</h3>
-              <p className="text-gold">Responsable Production</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    
     </div>
   );
 }

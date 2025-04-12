@@ -9,7 +9,7 @@ export default function Home() {
       <div 
         className="h-[600px] bg-cover bg-center relative"
         style={{
-          backgroundImage: 'url("https://africanpeopleemergence.wordpress.com/wp-content/uploads/2019/02/main-1024x687-1.jpg")'
+          backgroundImage: 'url("../images/bgi.JPG")'
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">

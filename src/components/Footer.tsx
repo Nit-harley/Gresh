@@ -29,12 +29,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-gold">Catégories</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gold">Collections</h3>
             <ul className="space-y-2">
-              <li><Link to="/catalog?category=Hommes" className="text-gray-300 hover:text-gold transition-colors">Hommes</Link></li>
-              <li><Link to="/catalog?category=Femmes" className="text-gray-300 hover:text-gold transition-colors">Femmes</Link></li>
-              <li><Link to="/catalog?category=Couples" className="text-gray-300 hover:text-gold transition-colors">Couples</Link></li>
-              <li><Link to="/catalog?category=Accessoires" className="text-gray-300 hover:text-gold transition-colors">Accessoires</Link></li>
+              <li><Link to="/catalog?category=Eliang Mine ga" className="text-gray-300 hover:text-gold transition-colors">Eliang Mine ga</Link></li>
+              <li><Link to="/catalog?category=Coupe Sirène" className="text-gray-300 hover:text-gold transition-colors">Coupe Sirène</Link></li>
+              <li><Link to="/catalog?category=La Mav" className="text-gray-300 hover:text-gold transition-colors">La Mav</Link></li>
+              <li><Link to="/catalog?category=Bango" className="text-gray-300 hover:text-gold transition-colors">Bango</Link></li>
             </ul>
           </div>
 
@@ -43,7 +43,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-2">
                 <Phone className="text-gold" size={20} />
-                <span>+241 77 98 23 45</span>
+                <span>+241 04 52 23 65</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="text-gold" size={20} />
@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">© 2024 Gresh - Mode Africaine Moderne. Tous droits réservés.</p>
+          <p className="text-gray-400">© 2025 Harley_Dev - Mode Africaine Moderne. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

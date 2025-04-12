@@ -16,7 +16,7 @@ export default function Catalog() {
 
   const handleWhatsApp = (product: Product) => {
     const message = `Bonjour, je suis intéressé(e) par ${product.name} à ${product.price} FCFA`;
-    const whatsappUrl = `https://wa.me/+24177982345?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/+24104522365?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -62,7 +62,7 @@ export default function Catalog() {
       <div
         className="h-[400px] bg-cover bg-center relative"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1534702718572-448a8d5df8e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")'
+          backgroundImage: 'url("../images/contactcover.jpeg")'
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">

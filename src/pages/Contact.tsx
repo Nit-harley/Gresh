@@ -49,7 +49,7 @@ export default function Contact() {
                 <Phone className="text-gold mt-1" size={24} />
                 <div>
                   <h3 className="font-semibold mb-1 text-primary">Téléphone</h3>
-                  <p className="text-gray-600">+241 77 98 23 45</p>
+                  <p className="text-gray-600">+241 04 52 23 65</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">

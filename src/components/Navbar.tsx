@@ -69,7 +69,7 @@ export default function Navbar() {
             ))}
             <div className="flex items-center space-x-2 pt-4 border-t border-gray-700 mt-4">
               <Phone className="text-gold" size={20} />
-              <span>+241 77 98 23 45</span>
+              <span>+241 04 52 23 65</span>
             </div>
           </nav>
         )}

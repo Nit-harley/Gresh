@@ -46,10 +46,6 @@ export default function Footer() {
                 <span>+241 04 52 23 65</span>
               </li>
               <li className="flex items-center space-x-2">
-                <Mail className="text-gold" size={20} />
-                <span>contact@gresh.ga</span>
-              </li>
-              <li className="flex items-center space-x-2">
                 <MapPin className="text-gold" size={20} />
                 <span>Quartier Louis, Libreville, Gabon</span>
               </li>

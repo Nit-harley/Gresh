@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { products, categories } from '../data';
 import type { Product } from '../types';
 
@@ -7,8 +7,7 @@ export default function Catalog() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
-  const [touchStart, setTouchStart] = useState<number>(0);
-  const [touchEnd, setTouchEnd] = useState<number>(0);
+  const touchStartX = useRef<number | null>(null);
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -41,19 +40,21 @@ export default function Catalog() {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.touches[0].clientX);
+    touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    setTouchEnd(e.changedTouches[0].clientX);
-    if (touchStart - touchEnd > 100) {
-      // Swipe left (next image)
-      handleNext();
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+
+    if (diff > 50) {
+      handleNext(); // Swipe gauche
+    } else if (diff < -50) {
+      handlePrev(); // Swipe droite
     }
-    if (touchEnd - touchStart > 100) {
-      // Swipe right (previous image)
-      handlePrev();
-    }
+
+    touchStartX.current = null;
   };
 
   return (
@@ -144,14 +145,14 @@ export default function Catalog() {
               >
                 &lt;
               </button>
-              
-              {/* Image with responsive sizing */}
+
+              {/* Image */}
               <img
                 src={modalImages[carouselIndex]}
                 alt="Enlarged product"
-                className="w-full max-h-[80vh] object-contain rounded-lg transition-all duration-300"
+                className="w-full max-h-[80vh] object-contain rounded-lg transition-transform duration-300 ease-in-out"
               />
-              
+
               {/* Right Arrow */}
               <button
                 onClick={handleNext}
@@ -160,7 +161,7 @@ export default function Catalog() {
                 &gt;
               </button>
             </div>
-            
+
             {/* Indicator */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4">
               {modalImages.map((_, index) => (

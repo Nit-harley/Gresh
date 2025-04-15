@@ -7,7 +7,7 @@ export default function Catalog() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
-  const touchStartX = useRef<number | null>(null);
+  const touchStartX = useRef<number | null>(null); // ref au lieu de state
 
   const filteredProducts = selectedCategory === 'all'
     ? products

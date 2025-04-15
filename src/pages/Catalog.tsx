@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { products, categories } from '../data';
 import type { Product } from '../types';
 
@@ -7,7 +7,6 @@ export default function Catalog() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
-  const touchStartX = useRef<number | null>(null); // ref au lieu de state
 
   const filteredProducts = selectedCategory === 'all'
     ? products
@@ -39,24 +38,6 @@ export default function Catalog() {
     setCarouselIndex((prev) => (prev - 1 + modalImages.length) % modalImages.length);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-
-    if (diff > 50) {
-      handleNext(); // Swipe gauche
-    } else if (diff < -50) {
-      handlePrev(); // Swipe droite
-    }
-
-    touchStartX.current = null;
-  };
-
   return (
     <div className="bg-primary-light min-h-screen">
       {/* Hero Section */}
@@ -69,7 +50,9 @@ export default function Catalog() {
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Notre Catalogue</h1>
-            <p className="text-lg md:text-xl">Nos tenues sont faites de wax hollandais et de organza et la couture de base est faite en élastique, alors découvrez des tenues africaines modernes qui vous feront rayonner</p>
+            <p className="text-lg md:text-xl">
+              Nos tenues sont faites de wax hollandais et de organza et la couture de base est faite en élastique, alors découvrez des tenues africaines modernes qui vous feront rayonner
+            </p>
           </div>
         </div>
       </div>
@@ -126,44 +109,43 @@ export default function Catalog() {
       {isModalOpen && modalImages.length > 0 && (
         <div
           className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
         >
           <div className="relative max-w-4xl mx-4 w-full">
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-white text-3xl font-bold"
+              className="absolute top-4 right-4 text-white text-3xl font-bold z-50"
             >
               &times;
             </button>
-            <div className="flex justify-center items-center space-x-4 sm:space-x-6">
+
+            {/* Image with arrows */}
+            <div className="relative flex justify-center items-center">
               {/* Left Arrow */}
               <button
                 onClick={handlePrev}
-                className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200 sm:text-xl text-lg"
+                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-3 rounded-full z-30"
               >
                 &lt;
               </button>
 
-              {/* Image */}
               <img
                 src={modalImages[carouselIndex]}
                 alt="Enlarged product"
-                className="w-full max-h-[80vh] object-contain rounded-lg transition-transform duration-300 ease-in-out"
+                className="w-full max-h-[80vh] object-contain rounded-lg transition-transform duration-300 ease-in-out z-10"
               />
 
               {/* Right Arrow */}
               <button
                 onClick={handleNext}
-                className="bg-white bg-opacity-30 p-4 rounded-full text-white hover:bg-opacity-70 transition duration-200 sm:text-xl text-lg"
+                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-3 rounded-full z-30"
               >
                 &gt;
               </button>
             </div>
 
             {/* Indicator */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-30">
               {modalImages.map((_, index) => (
                 <div
                   key={index}
@@ -177,3 +159,4 @@ export default function Catalog() {
     </div>
   );
 }
+

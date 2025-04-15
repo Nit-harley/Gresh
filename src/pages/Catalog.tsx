@@ -107,55 +107,94 @@ export default function Catalog() {
 
       {/* Modal with carousel */}
       {isModalOpen && modalImages.length > 0 && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+  <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+    <div className="relative max-w-4xl mx-4 w-full">
+      {/* Close Button */}
+      <button
+        onClick={closeModal}
+        className="absolute top-4 right-4 text-white text-3xl font-bold z-50"
+      >
+        &times;
+      </button>
+
+      {/* Image with arrows */}
+      <div className="relative flex justify-center items-center">
+        {/* Left Arrow */}
+        <button
+          onClick={handlePrev}
+          className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-3 rounded-full z-30"
         >
-          <div className="relative max-w-4xl mx-4 w-full">
-            {/* Close Button */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-white text-3xl font-bold z-50"
-            >
-              &times;
-            </button>
+          &lt;
+        </button>
 
-            {/* Image with arrows */}
-            <div className="relative flex justify-center items-center">
-              {/* Left Arrow */}
-              <button
-                onClick={handlePrev}
-                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-3 rounded-full z-30"
-              >
-                &lt;
-              </button>
+        <img
+          src={modalImages[carouselIndex]}
+          alt="Enlarged product"
+          className="w-full max-h-[80vh] object-contain rounded-lg transition-transform duration-300 ease-in-out z-10"
+        />
 
-              <img
-                src={modalImages[carouselIndex]}
-                alt="Enlarged product"
-                className="w-full max-h-[80vh] object-contain rounded-lg transition-transform duration-300 ease-in-out z-10"
-              />
+        {/* Right Arrow */}
+        <button
+          onClick={handleNext}
+          className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-3 rounded-full z-30"
+        >
+          &gt;
+        </button>
+      </div>
 
-              {/* Right Arrow */}
-              <button
-                onClick={handleNext}
-                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white p-3 rounded-full z-30"
-              >
-                &gt;
-              </button>
-            </div>
+      {/* Share buttons */}
+      <div className="mt-4 flex justify-center space-x-4 z-40">
+        {/* WhatsApp */}
+        <button
+          onClick={() => {
+            const url = modalImages[carouselIndex];
+            const message = `Regarde cette tenue que j'ai trouvée ! ${url}`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+          }}
+          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm shadow-md"
+        >
+          WhatsApp
+        </button>
 
-            {/* Indicator */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-30">
-              {modalImages.map((_, index) => (
-                <div
-                  key={index}
-                  className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full ${carouselIndex === index ? 'bg-white' : 'bg-gray-400'}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+        {/* Facebook */}
+        <button
+          onClick={() => {
+            const url = modalImages[carouselIndex];
+            const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            window.open(fbUrl, '_blank');
+          }}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm shadow-md"
+        >
+          Facebook
+        </button>
+
+        {/* Copier le lien */}
+        <button
+          onClick={() => {
+            const url = modalImages[carouselIndex];
+            navigator.clipboard.writeText(url);
+            alert("Lien copié !");
+          }}
+          className="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-full text-sm shadow-md"
+        >
+          Copier lien
+        </button>
+      </div>
+
+      {/* Indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-30">
+        {modalImages.map((_, index) => (
+          <div
+            key={index}
+            className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full ${carouselIndex === index ? 'bg-white' : 'bg-gray-400'}`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

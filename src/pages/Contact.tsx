@@ -44,7 +44,7 @@ export default function Contact() {
               Discutons sur WhatsApp
             </a>
           </div>
-          
+
           {/* Contact Information */}
           <div>
             <h2 className="text-3xl font-bold mb-8 text-primary">Nos Coordonnées</h2>
@@ -69,13 +69,6 @@ export default function Contact() {
                   <h3 className="font-semibold mb-1 text-primary">Heures d'ouverture</h3>
                   <p className="text-gray-600">Lundi - Samedi: 9h00 - 18h00</p>
                   <p className="text-gray-600">Dimanche: Fermé</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <Mail className="text-gold mt-1" size={24} />
-                <div>
-                  <h3 className="font-semibold mb-1 text-primary">Email</h3>
-                  <p className="text-gray-600">contact@votreentreprise.com</p>
                 </div>
               </div>
             </div>
